@@ -2,7 +2,7 @@ import random
 from flask import Flask, request
 import datetime
 
-app = Flask(__name__, static_folder="web")
+app = Flask(__name__, static_folder="static_file")
 
 users={}
 chats={}
