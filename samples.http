@@ -1,0 +1,25 @@
+@api=http://localhost:8888
+
+### make chat
+POST {{api}}/chat
+
+### Add a new user
+POST {{api}}/users/add
+Content-type: application/json
+
+{
+    "name":"aaaaaa"
+}
+
+### sent a massage
+POST {{api}}/message
+Content-Type:application/json
+
+{
+    "chat_id":1,
+    "sender_id":647564845505384,
+    "text":"salam"
+}
+
+### Get chat history
+GET {{api}}/chat/1/messages
