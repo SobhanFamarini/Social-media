@@ -6,15 +6,15 @@ app = Flask(__name__, static_folder="static_file")
 
 users={}
 chats={}
+chat_id=1
+chats[chat_id]={
+    "chat_id":chat_id,
+    "messages":[]
+}
 
-@app.route('/chat', methods=["POST"])
-def chat():
-    chat_id=1
-    chats[chat_id]={
-        "chat_id":chat_id,
-        "messages":[]
-    }
-    return chats[chat_id]
+@app.route('/', methods=["GET"])
+def route():
+    return app.send_static_file('index.html')
 
 @app.route('/users/add', methods=["POST"])
 def add_user():

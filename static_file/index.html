@@ -1,13 +1,12 @@
 <html>
     <head>
-        <meta></meta>
-        <title>Social media</title>
+        <title>Social Media</title>
     </head>
-    <body onload="add_chat()">
+    <body>
         <script>
-            let api="http://localhost:8888"
+            let api= document.location.origin;
             user_id=0;
-            chat_id=0;
+            chat_id=1;
             function add_user()
             {
                 let user_name=document.getElementById("user_name").value
@@ -25,26 +24,10 @@
                 .then(response => response.json())
                 .then(data =>
                 {
+
                     user_id=data["user_id"]
                     alert('User Id is '+ user_id)
                 })
-            }
-
-            function add_chat()
-            {
-                fetch(api + "/chat",{
-                    method:'POST',
-                    mode:"cors",
-                    headers:{
-                        'content-type':'application/json'
-                    }
-                })
-                .then(response => response.json())
-                .then(data =>
-                {
-                    chat_id=data["chat_id"]
-                })
-                let id=1
             }
 
             function send_message()
