@@ -57,4 +57,4 @@ def get_messages(chat_id):
     }, chat_messages))
     return messages
 
-app.run(host= '0.0.0.0', port=8888)
+#app.run(host= '0.0.0.0', port=8888)
