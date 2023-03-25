@@ -1,0 +1,33 @@
+<html>
+    <head><title>Make group</title></head>
+    <body>
+        <script>
+            let api = document.location.origin
+            function make()
+            {
+                let name = document.getElementById('name').value
+                fetch(api + '/chat/add',{
+                    method:'POST',
+                    mode:"cors",
+                    headers:{
+                        'content-type':'application/json'
+                    },
+                    body: JSON.stringify({
+                        'name':name
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    chat_id=data['chat_id']
+                    chat_url = document.location.origin + '/group' + '?group=' + chat_id
+                    document.getElementById('chat_url').href = chat_url
+                    document.getElementById('chat_url').innerHTML = chat_url
+                })
+            }
+        </script>
+        Group name: <input type="text" id="name" size="75">
+        <button onclick="make()">Make group</button>
+        <br><br>
+        <a href="" id="chat_url">Chat Url</a>
+    </body>
+</html>

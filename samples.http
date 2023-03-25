@@ -1,15 +1,26 @@
 @api=http://localhost:8888
 
-### make chat
-POST {{api}}/chat
-
 ### Add a new user
-POST {{api}}/users/add
+POST {{api}}/users
 Content-type: application/json
 
 {
-    "name":"aaaaaa"
+    "name":"sobhan",
+    "email":"sobhan2007f@gmail.com",
+    "password":"sobhan15243"
 }
+
+### find user
+GET {{api}}/users/fvdv0gecrt0u
+
+### delete user
+DELETE {{api}}/users/fvdv0gecrt0u
+Content-type: application/json
+{
+    "name":"sobhan",
+    "email":"sobhan2007f@gmail.com",
+    "password":"sobhan15243"
+} 
 
 ### sent a massage
 POST {{api}}/message

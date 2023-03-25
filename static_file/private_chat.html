@@ -1,26 +1,28 @@
 <html>
-    <head>
-        <title>Global chat</title>
-    </head>
-    <body onload="find_user()">
+    <head><title>Private chat</title></head>
+    <body onload="find_chat() , find_user()">
         <script>
-            let api= document.location.origin;
-            user_id=localStorage.getItem("user_id")
-            chat_id=1;
+            let api = document.location.origin
+            let user_id = localStorage.getItem('user_id')
+            let chat_id = document.location.search.replace('?group=','')
 
             function find_user()
             {
                 fetch(api + `/users/${user_id}`)
                 .then(response => response.json())
-                .then(data =>
-                {
+                .then(data => {
                     user_name=data['name']
-                    document.getElementById("name").innerHTML = user_name
                 })
             }
 
-            function redirect(){
-                document.location='/private'
+            function find_chat()
+            {
+                fetch(api + '/find')
+                .then(response => response.json())
+                .then(data => {
+                    chat_name = data[chat_id]['name']
+                    document.getElementById('id').innerHTML=chat_name
+                })
             }
 
             function send_message()
@@ -65,20 +67,11 @@
             setInterval(() => {
                 get_messages()
             }, 1000)
-
         </script>
-        <button onclick="redirect()" style="margin-left: 93%;">Private chat</button>
-        <p>Global chat:</p> 
-        <textarea id="chat_history" cols="185" rows="27"></textarea>
-        <br>
-        <br>
+        <h1 id="id"></h1>
+        <textarea id="chat_history" cols="185" rows="30"></textarea>
+        <br><br>
         <input type="text" id="message_id" size="80" placeholder="Type your message">
         <button onclick="send_message()">Sent</button>
-        <br><br><br>
-        <div style="border-top: 2px solid black;"></div>
-        <h1 id="name"></h1>
-        <!--<button style="margin-right: 30px;">Edit</button>
-        <button style="margin-right: 30px;">DELETE account</button>
-        <button>Logout</button>-->
     </body>
 </html>

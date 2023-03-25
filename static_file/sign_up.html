@@ -1,0 +1,51 @@
+<html>
+    <head><title>Sign up</title></head>
+    <body onload="redirect_2()" style="background-color: rgb(0, 255, 102);">
+            <script>
+            let api=document.location.origin
+            function redirect_2()
+            {
+                if(!(localStorage.getItem("user_id")===null)){
+                    document.location = '/main'
+                }
+            }
+            function submit()
+            {
+                let user_name=document.getElementById("user_name").value
+                let email=document.getElementById("email").value
+                let password=document.getElementById("password").value
+                fetch(api + "/users",{
+                    method:'POST',
+                    mode:"cors",
+                    headers:{
+                        'content-type':'application/json'
+                    },
+                    body: JSON.stringify({
+                        "name":user_name,
+                        "email":email,
+                        "password":password
+                    })
+                })
+                .then(response => response.json())
+                .then(data =>
+                {
+                    user_id=data[0]['key']
+                    localStorage.setItem("user_id",user_id)
+                    redirect(data)
+                })
+            }
+
+            function redirect(data){
+                document.location='/main'
+            }
+        </script>
+        User name:<br><input type="text" id="user_name" required autofocus>
+        <br><br>
+        Email:<br><input type="email" id="email" required>
+        <br><br>
+        password:<br><input type="password" id="password" required>
+        <br><br>
+        <button onclick="submit()">Submit</button>
+        <!--<h4>have an account?<a href="sign_in">login</a></h4>-->
+    </body>
+</html>
